@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { siteConfig } from '$lib/config/site';
 	import { page } from '$app/state';
+	import ThemeButton from '$lib/components/ThemeButton.svelte';
 
 	import { cn } from '$lib/utils';
 
@@ -25,9 +26,9 @@
 	</a>
 {/snippet}
 
-<header class="sticky top-0 bg-primary-foreground p-4 shadow-md">
+<header class="sticky top-0 flex justify-between bg-primary-foreground p-4 shadow-md">
 	<nav class="flex flex-row items-center gap-4">
-		<div class="mr-4">
+		<div class="mr-8">
 			{siteConfig.companyName}
 		</div>
 		<ul class="hidden max-w-sm bg-red-500 md:contents">
@@ -36,4 +37,5 @@
 			{/each}
 		</ul>
 	</nav>
+	<ThemeButton />
 </header>
