@@ -3,6 +3,8 @@
 	import { page } from '$app/state';
 
 	import { cn } from '$lib/utils';
+
+	// TODO: Move to separate types folder
 	type MenuItem = {
 		label: string;
 		slug: string;

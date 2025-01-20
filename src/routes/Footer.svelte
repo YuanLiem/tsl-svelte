@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { siteConfig } from '$lib/config/site';
+	// TODO: Footer navigation
 </script>
 
 <footer class="container py-8">
