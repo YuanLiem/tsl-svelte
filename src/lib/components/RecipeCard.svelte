@@ -52,7 +52,7 @@
 		<img src={recipe.image} class="h-full object-cover" alt={recipe.name} />
 	</figure>
 	<div class="flex flex-col items-start gap-4 p-8 md:w-1/2">
-		<div class="flex flex-row justify-between">
+		<div class="flex w-full flex-row items-center justify-between">
 			<h3 class="text-xl font-bold">{recipe.name}</h3>
 			<span
 				class="inline-flex h-fit items-center rounded-xl border bg-primary-foreground px-2 py-0.5 text-sm text-muted-foreground"
