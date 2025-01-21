@@ -2,21 +2,21 @@
 	import { siteConfig } from '$lib/config/site';
 	import { page } from '$app/state';
 	import ThemeButton from '$lib/components/ThemeButton.svelte';
+	import type { MenuItem } from '$lib/types/types';
 
 	import { cn } from '$lib/utils';
 
-	// TODO: Move to separate types folder
-	type MenuItem = {
-		label: string;
-		slug: string;
-	};
+	//type MenuItem = {
+	//	label: string;
+	//	slug: string;
+	//};
 </script>
 
 {#snippet menuItem({ ...props }: MenuItem)}
 	<a
 		href={props.slug}
 		class={cn(
-			page.url.pathname === props.slug && 'bg-teal-500',
+			page.url.pathname === props.slug && 'bg-teal-500 text-white',
 			'rounded-md px-4 py-2 hover:opacity-80'
 		)}
 	>
