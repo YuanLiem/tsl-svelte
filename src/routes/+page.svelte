@@ -6,8 +6,7 @@
 </script>
 
 <div class="container py-8">
-	<h1 class="mb-8 text-2xl">Let Math.random decide what's on the menu</h1>
-
+	<h1 class="mb-8 text-2xl font-bold">Let Math.random decide what's on the menu</h1>
 	{#await data.recipe}
 		<RecipeSkeleton />
 	{:then recipe}
