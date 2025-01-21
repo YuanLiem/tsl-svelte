@@ -15,9 +15,11 @@
 				>
 			{/each}
 		</div>
-		<div class="flex flex-row items-end gap-4 pt-4 md:w-1/2">
+		<div class="flex flex-row items-end justify-end gap-4 pt-4 md:w-1/2">
 			{#each siteConfig.socials as social}
-				<a href={social.href} target="_blank"><social.icon class="h-4 w-4" /></a>
+				<a href={social.href} class="hover:opacity-80" target="_blank"
+					><social.icon class="h-4 w-4" /></a
+				>
 			{/each}
 		</div>
 	</div>
