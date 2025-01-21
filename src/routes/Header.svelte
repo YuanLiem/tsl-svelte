@@ -5,11 +5,6 @@
 	import type { MenuItem } from '$lib/types/types';
 
 	import { cn } from '$lib/utils';
-
-	//type MenuItem = {
-	//	label: string;
-	//	slug: string;
-	//};
 </script>
 
 {#snippet menuItem({ ...props }: MenuItem)}
@@ -26,11 +21,11 @@
 	</a>
 {/snippet}
 
-<header class="sticky top-0 flex justify-between bg-primary-foreground p-4 shadow-md">
+<header class="sticky top-0 flex items-center justify-between bg-primary-foreground p-4 shadow-md">
+	<div class="font-bold">
+		{siteConfig.companyName}
+	</div>
 	<nav class="flex flex-row items-center gap-4">
-		<div class="mr-8">
-			{siteConfig.companyName}
-		</div>
 		<ul class="hidden max-w-sm bg-red-500 md:contents">
 			{#each siteConfig.menuItems as item}
 				{@render menuItem(item)}
