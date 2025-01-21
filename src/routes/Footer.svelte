@@ -10,7 +10,9 @@
 	<div class="flex flex-col md:flex-row">
 		<div class="flex flex-row gap-2 md:w-1/2 md:flex-col">
 			{#each siteConfig.menuItems as item}
-				<a href={item.slug} target="_blank" class="text-sm">{item.label}</a>
+				<a href={item.slug} target="_blank" class="w-fit text-sm hover:text-muted-foreground"
+					>{item.label}</a
+				>
 			{/each}
 		</div>
 		<div class="flex flex-row items-end gap-4 pt-4 md:w-1/2">
