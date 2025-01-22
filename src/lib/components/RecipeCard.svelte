@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Recipe } from '$lib/types/types';
 	import { ChartColumnIncreasing, Clock4, Clock8, HandPlatter, Icon } from 'lucide-svelte';
-	import Star from 'lucide-svelte/icons/star';
+	import RecipeRating from './RecipeRating.svelte';
 
 	let { recipe }: { recipe: Recipe } = $props();
 
@@ -10,8 +10,6 @@
 		value?: string;
 		icon?: typeof Icon;
 	};
-
-	const tags = recipe.tags;
 
 	const info: Detail[] = [
 		{
@@ -35,7 +33,8 @@
 			icon: HandPlatter
 		}
 	];
-	console.log(tags);
+
+	const tags = recipe.tags;
 </script>
 
 {#snippet detailBadge({ ...props }: Detail)}
@@ -54,12 +53,7 @@
 	<div class="flex flex-col items-start gap-4 p-8 md:w-1/2">
 		<div class="flex w-full flex-row items-center justify-between">
 			<h3 class="text-xl font-bold">{recipe.name}</h3>
-			<span
-				class="inline-flex h-fit items-center rounded-xl border bg-primary-foreground px-2 py-0.5 text-sm text-muted-foreground"
-			>
-				<Star class="mr-2 inline-flex h-4 w-4 fill-yellow-400 stroke-none" />
-				{recipe.rating}
-			</span>
+			<RecipeRating rating={recipe.rating} />
 		</div>
 		<div class="flex flex-row flex-wrap items-center justify-start gap-4">
 			{#each info as detail}
