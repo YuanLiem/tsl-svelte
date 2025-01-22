@@ -16,6 +16,7 @@ export type Recipe = {
 	rating: number;
 	reviewCount: number;
 	mealType: string[];
+	caloriesPerServing: number;
 };
 
 export type RecipeFeature = {

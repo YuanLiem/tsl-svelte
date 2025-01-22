@@ -1,6 +1,12 @@
 <script lang="ts">
 	import type { Recipe, RecipeFeature } from '$lib/types/types';
-	import { ChartColumnIncreasing, Clock4, Clock8, HandPlatter, Icon } from 'lucide-svelte';
+	import {
+		ChartColumnIncreasing,
+		Clock4,
+		Clock8,
+		HandPlatter,
+		GaugeCircleIcon
+	} from 'lucide-svelte';
 	import RecipeRating from './RecipeRating.svelte';
 	import RecipeBadge from './RecipeBadge.svelte';
 
@@ -28,6 +34,12 @@
 			icon: HandPlatter
 		}
 	];
+
+	const calories = {
+		label: 'Calories/Serving',
+		value: `${recipe.caloriesPerServing} kcal`,
+		icon: GaugeCircleIcon
+	};
 
 	const tags = recipe.tags;
 </script>
@@ -66,10 +78,13 @@
 				</ol>
 			</div>
 		</div>
-		<div class="flex flex-row flex-wrap gap-2 self-end">
-			{#each tags as tag}
-				<RecipeBadge features={{ value: tag }} />
-			{/each}
+		<div class="flex w-full flex-row flex-wrap items-center justify-between gap-2">
+			<RecipeBadge features={calories} />
+			<div class="inline-flex gap-4">
+				{#each tags as tag}
+					<RecipeBadge features={{ value: tag }} />
+				{/each}
+			</div>
 		</div>
 	</div>
 </div>
