@@ -1,17 +1,12 @@
 <script lang="ts">
-	import type { Recipe } from '$lib/types/types';
+	import type { Recipe, RecipeFeature } from '$lib/types/types';
 	import { ChartColumnIncreasing, Clock4, Clock8, HandPlatter, Icon } from 'lucide-svelte';
 	import RecipeRating from './RecipeRating.svelte';
+	import RecipeBadge from './RecipeBadge.svelte';
 
 	let { recipe }: { recipe: Recipe } = $props();
 
-	type Detail = {
-		label?: string;
-		value?: string;
-		icon?: typeof Icon;
-	};
-
-	const info: Detail[] = [
+	const info: RecipeFeature[] = [
 		{
 			label: 'Prep Time',
 			value: `${recipe.prepTimeMinutes} mins`,
@@ -37,15 +32,6 @@
 	const tags = recipe.tags;
 </script>
 
-{#snippet detailBadge({ ...props }: Detail)}
-	<div class="inline-flex w-fit rounded-full border bg-muted px-2 py-0.5 text-sm">
-		<props.icon class="mr-2 h-4 w-4" />
-		<span class="text-xs">
-			{props.value}
-		</span>
-	</div>
-{/snippet}
-
 <div class="flex flex-col overflow-hidden rounded-xl border shadow-md md:flex-row">
 	<figure class="overflow-hidden md:w-1/2">
 		<img src={recipe.image} class="h-full object-cover" alt={recipe.name} />
@@ -57,7 +43,7 @@
 		</div>
 		<div class="flex flex-row flex-wrap items-center justify-start gap-4">
 			{#each info as detail}
-				{@render detailBadge(detail)}
+				<RecipeBadge features={detail} />
 			{/each}
 		</div>
 		<div class="flex flex-grow flex-col gap-4 md:flex-row">
@@ -82,7 +68,7 @@
 		</div>
 		<div class="flex flex-row flex-wrap gap-2 self-end">
 			{#each tags as tag}
-				{@render detailBadge({ value: tag })}
+				<RecipeBadge features={{ value: tag }} />
 			{/each}
 		</div>
 	</div>

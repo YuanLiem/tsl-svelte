@@ -18,6 +18,12 @@ export type Recipe = {
 	mealType: string[];
 };
 
+export type RecipeFeature = {
+	label?: string;
+	value?: string;
+	icon?: typeof Icon;
+};
+
 export type MenuItem = {
 	label: string;
 	slug: string;
