@@ -3,7 +3,7 @@
 	import RecipeBadge from './RecipeBadge.svelte';
 	import RecipeRating from './RecipeRating.svelte';
 	let { props }: { props: Recipe } = $props();
-	import { Star, Gauge, Clock, ChartColumnIncreasing, Earth } from 'lucide-svelte';
+	import { ChartColumnIncreasing, Earth } from 'lucide-svelte';
 	// TODO: Link once route is done
 
 	const features = [
