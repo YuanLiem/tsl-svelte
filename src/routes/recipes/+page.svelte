@@ -1,5 +1,6 @@
 <script lang="ts">
 	import RecipePreview from '$lib/components/RecipePreview.svelte';
+	import { ChevronLeft, ChevronRight } from 'lucide-svelte';
 	import { page } from '$app/state';
 
 	let { data } = $props();
@@ -16,6 +17,9 @@
 		{/each}
 	</div>
 	<div class="mx-auto flex max-w-lg flex-row justify-center gap-10 py-8">
+		{#if currentPage > 0 && currentPage < totalPages}
+			<a href={`/recipes?limit=${perPage}&skip=${perPage * (currentPage - 1)}`}><ChevronLeft /></a>
+		{/if}
 		{#each { length: totalPages } as _, page}
 			<a
 				href={`/recipes?limit=${perPage}&skip=${perPage * page}`}
@@ -24,5 +28,9 @@
 				{page + 1}
 			</a>
 		{/each}
+
+		{#if currentPage + 1 < totalPages}
+			<a href={`/recipes?limit=${perPage}&skip=${perPage * (currentPage + 1)}`}><ChevronRight /></a>
+		{/if}
 	</div>
 </div>
