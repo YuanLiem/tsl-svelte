@@ -20,7 +20,7 @@
 	];
 </script>
 
-<div class="mx-auto max-w-[80%] rounded-b-xl">
+<div class="mx-auto max-w-[80%] rounded-b-xl shadow-md">
 	<a href={`/recipes/${props.id}`}>
 		<figure class="relative overflow-hidden rounded-t-xl">
 			<img
