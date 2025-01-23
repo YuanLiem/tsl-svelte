@@ -21,7 +21,7 @@
 </script>
 
 <div class="mx-auto max-w-[80%] rounded-b-xl">
-	<a href="/">
+	<a href={`/recipes/${props.id}`}>
 		<figure class="relative overflow-hidden rounded-t-xl">
 			<img
 				class="z-10 aspect-auto object-cover transition-transform duration-300 hover:scale-105"
