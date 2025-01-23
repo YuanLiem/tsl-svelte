@@ -9,6 +9,7 @@ export const load: PageLoad = async ({ url, fetch }) => {
 		return response;
 	}
 	return {
-		recipeData: await getRecipeChunk(limit, skip)
+		recipeData: await getRecipeChunk(limit, skip),
+		allRecipes: await getRecipeChunk(50, 0)
 	};
 };

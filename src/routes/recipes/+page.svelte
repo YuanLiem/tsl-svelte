@@ -10,7 +10,7 @@
 </script>
 
 <div class="container">
-	<div class="flex flex-row">Search bar goes here</div>
+	<div class="flex">Search bar goes here</div>
 	<div class="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
 		{#each data.recipeData.recipes as recipe}
 			<RecipePreview props={recipe} />
@@ -28,7 +28,6 @@
 				{page + 1}
 			</a>
 		{/each}
-
 		{#if currentPage + 1 < totalPages}
 			<a href={`/recipes?limit=${perPage}&skip=${perPage * (currentPage + 1)}`}><ChevronRight /></a>
 		{/if}
