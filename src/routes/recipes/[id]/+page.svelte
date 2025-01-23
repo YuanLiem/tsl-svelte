@@ -4,5 +4,7 @@
 </script>
 
 <div class="container">
-	<RecipeCard recipe={data.recipe} />
+	<div class="mx-auto max-w-lg py-8 md:max-w-none">
+		<RecipeCard recipe={data.recipe} />
+	</div>
 </div>
