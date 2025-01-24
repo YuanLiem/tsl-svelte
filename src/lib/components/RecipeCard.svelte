@@ -44,7 +44,9 @@
 	const tags = recipe.tags;
 </script>
 
-<div class="flex flex-col overflow-hidden rounded-xl border shadow-md md:flex-row">
+<div
+	class="flex flex-col overflow-hidden rounded-xl border bg-primary-foreground shadow-md md:flex-row"
+>
 	<figure class="overflow-hidden md:w-1/2">
 		<img src={recipe.image} class="h-full object-cover" alt={recipe.name} />
 	</figure>
@@ -78,9 +80,9 @@
 				</ol>
 			</div>
 		</div>
-		<div class="flex w-full flex-row flex-wrap items-center justify-between gap-2">
+		<div class="flex w-full flex-row flex-wrap items-center justify-between gap-4">
 			<RecipeBadge features={calories} />
-			<div class="inline-flex gap-4">
+			<div class="inline-flex flex-wrap gap-4">
 				{#each tags as tag}
 					<RecipeBadge features={{ value: tag }} />
 				{/each}
