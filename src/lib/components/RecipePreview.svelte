@@ -4,7 +4,6 @@
 	import RecipeRating from './RecipeRating.svelte';
 	let { props }: { props: Recipe } = $props();
 	import { ChartColumnIncreasing, Earth } from 'lucide-svelte';
-	// TODO: Link once route is done
 
 	const features = [
 		{
