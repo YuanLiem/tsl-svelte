@@ -7,6 +7,7 @@
 
 	import RecipeModal from '$lib/components/RecipeModal.svelte';
 	import RecipePage from './[id]/+page.svelte';
+	import type { ChangeEventHandler } from 'svelte/elements';
 
 	let { data } = $props();
 
@@ -39,7 +40,7 @@
 
 	let filteredRecipes = $derived.by(() => {
 		let target = searchText?.toLowerCase();
-		if (target) {
+		if (target || selectedTag) {
 			return recipeBuffer.filter((r) => r.searchTerms.includes(target));
 		} else {
 			return recipeBuffer;
@@ -51,6 +52,22 @@
 	let paginatedRecipes = $derived(
 		filteredRecipes.slice(currentPage * perPage, (currentPage + 1) * perPage)
 	);
+	let selectedTag = $state<string | null>(null);
+
+	function getRecipeTags(input: Array<Recipe & { searchTerms: string }>) {
+		let tagSet = new Set();
+		input.forEach((recipe) => {
+			recipe.tags.forEach((tag) => {
+				tagSet.add(tag);
+			});
+		});
+		return tagSet;
+	}
+
+	function filterByTag(event: Event): void {
+		const selectElement = event.target as HTMLSelectElement;
+		const selectedTag = selectElement.value;
+	}
 </script>
 
 <div class="container">
@@ -61,6 +78,12 @@
 			type="text"
 			bind:value={searchText}
 		/>
+		<select onchange={filterByTag} name="tag" id="tag">
+			<option>Select a tag</option>
+			{#each getRecipeTags(recipeBuffer) as item}
+				<option value={item}>{item}</option>
+			{/each}
+		</select>
 	</div>
 	<div class="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 		{#each paginatedRecipes as recipe}
