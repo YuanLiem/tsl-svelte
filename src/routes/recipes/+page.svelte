@@ -16,7 +16,7 @@
 	let currentPage = $state(0);
 
 	async function openModal(e: MouseEvent) {
-		if (innerWidth < 640 || e.shiftKey || e.metaKey || e.ctrlKey || e.altKey) return;
+		if (innerWidth < 768 || e.shiftKey || e.metaKey || e.ctrlKey || e.altKey) return;
 		e.preventDefault();
 		const { href } = e.currentTarget as HTMLAnchorElement;
 
@@ -61,7 +61,7 @@
 			bind:value={searchText}
 		/>
 	</div>
-	<div class="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
+	<div class="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 		{#each paginatedRecipes as recipe}
 			<a href={`/recipes/${recipe.id}`} onclick={openModal}>
 				<RecipePreview props={recipe} />
