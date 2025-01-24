@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { Recipe } from '$lib/types/types';
 	import RecipePreview from '$lib/components/RecipePreview.svelte';
 	import { ChevronLeft, ChevronRight } from 'lucide-svelte';
 	import { preloadData, pushState, goto } from '$app/navigation';
@@ -26,12 +27,37 @@
 			goto(href);
 		}
 	}
+
+	const recipeBuffer: Array<Recipe & { searchTerms: string }> = data.allRecipes.recipes.map(
+		(recipe: Recipe) => ({
+			...recipe,
+			searchTerms: `${recipe.name} ${recipe.tags.join(' ')} ${recipe.difficulty}`.toLowerCase()
+		})
+	);
+
+	let searchText = $state<string | null>(null);
+
+	let filteredRecipes = $derived.by(() => {
+		let target = searchText?.toLowerCase();
+		if (target) {
+			return recipeBuffer.filter((r) => r.searchTerms.includes(target));
+		} else {
+			return recipeBuffer;
+		}
+	});
 </script>
 
 <div class="container">
-	<div class="flex">Search bar goes here</div>
+	<div class="flex justify-center py-8">
+		<input
+			placeholder="Filter recipes.."
+			class="rounded-lg border-2 border-primary p-2"
+			type="text"
+			bind:value={searchText}
+		/>
+	</div>
 	<div class="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
-		{#each data.recipeData.recipes as recipe}
+		{#each filteredRecipes as recipe}
 			<a href={`/recipes/${recipe.id}`} onclick={openModal}>
 				<RecipePreview props={recipe} />
 			</a>
