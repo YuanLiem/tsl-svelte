@@ -90,7 +90,7 @@
 				name="tag"
 				id="tag"
 			>
-				<option value="" selected>All tags</option>
+				<option value={null} selected>All tags</option>
 				{#each getRecipeFilters(filteredRecipes).tagSet as item}
 					<option value={item}>{item}</option>
 				{/each}
@@ -103,19 +103,25 @@
 				name="cuisine"
 				bind:value={selectedCuisine}
 			>
-				<option value="" selected>All cuisines</option>
-				{#each getRecipeFilters(recipeBuffer).cuisineSet as item}
+				<option value={null} selected>All cuisines</option>
+				{#each getRecipeFilters(filteredRecipes).cuisineSet as item}
 					<option value={item}>{item}</option>
 				{/each}
 			</select>
 		</label>
 	</div>
 	<div class="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-		{#each paginatedRecipes as recipe}
-			<a href={`/recipes/${recipe.id}`} onclick={openModal}>
-				<RecipePreview props={recipe} />
-			</a>
-		{/each}
+		{#if paginatedRecipes.length > 0}
+			{#each paginatedRecipes as recipe}
+				<a href={`/recipes/${recipe.id}`} onclick={openModal}>
+					<RecipePreview props={recipe} />
+				</a>
+			{/each}
+		{:else}
+			<p class="md:col-span3 text-center text-2xl text-muted-foreground lg:col-span-4">
+				No matching recipes found..
+			</p>
+		{/if}
 	</div>
 	<div class="mx-auto flex max-w-lg flex-row justify-center gap-10 py-8">
 		<button
