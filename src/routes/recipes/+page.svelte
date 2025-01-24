@@ -38,15 +38,20 @@
 	let searchText = $state<string | null>(null);
 
 	let selectedTag = $state<string | null>(null);
+
+	let selectedCuisine = $state<string | null>(null);
+
 	let filteredRecipes = $derived.by(() => {
 		let keyword = searchText?.toLowerCase();
 		let tag = selectedTag?.toLowerCase();
+		let cuisine = selectedCuisine?.toLowerCase();
 
 		return recipeBuffer.filter((r) => {
 			const matchesSearch = keyword ? r.keywords.includes(keyword) : true;
 			const matchesTag = tag ? r.tags.some((t) => t.toLowerCase() === tag) : true;
+			const matchesCuisine = cuisine ? r.cuisine.toLowerCase().includes(cuisine) : true;
 
-			return matchesSearch && matchesTag;
+			return matchesSearch && matchesTag && matchesCuisine;
 		});
 	});
 
@@ -56,36 +61,54 @@
 		filteredRecipes.slice(currentPage * perPage, (currentPage + 1) * perPage)
 	);
 
-	function getRecipeTags(input: Array<Recipe & { keywords: string }>) {
+	function getRecipeFilters(input: Array<Recipe & { keywords: string }>) {
 		let tagSet = new Set();
+		let cuisineSet = new Set();
 		input.forEach((recipe) => {
+			cuisineSet.add(recipe.cuisine);
 			recipe.tags.forEach((tag) => {
 				tagSet.add(tag);
 			});
 		});
-		return tagSet;
-	}
-
-	function filterByTag(event: Event): void {
-		const selectElement = event.target as HTMLSelectElement;
-		selectedTag = selectElement.value;
+		return { tagSet, cuisineSet };
 	}
 </script>
 
 <div class="container">
-	<div class="flex justify-center py-8">
+	<div class="flex flex-col flex-wrap content-center justify-center gap-10 py-8 md:flex-row">
 		<input
 			placeholder="Filter recipes.."
-			class="rounded-lg border-2 border-primary p-2"
+			class="rounded-lg border-2 p-2 focus:border-primary"
 			type="text"
 			bind:value={searchText}
 		/>
-		<select onchange={filterByTag} name="tag" id="tag">
-			<option>Select a tag</option>
-			{#each getRecipeTags(recipeBuffer) as item}
-				<option value={item}>{item}</option>
-			{/each}
-		</select>
+		<label for="tag" class="content-center">
+			<span class="mr-2">Select a tag </span>
+			<select
+				class="rounded-lg border-2 p-2 focus:border-primary"
+				bind:value={selectedTag}
+				name="tag"
+				id="tag"
+			>
+				<option value="" selected>All tags</option>
+				{#each getRecipeFilters(filteredRecipes).tagSet as item}
+					<option value={item}>{item}</option>
+				{/each}
+			</select>
+		</label>
+		<label for="cuisine" class="content-center">
+			<span class="mr-2"> Select a cuisine </span>
+			<select
+				class="rounded-lg border-2 p-2 focus:border-primary"
+				name="cuisine"
+				bind:value={selectedCuisine}
+			>
+				<option value="" selected>All cuisines</option>
+				{#each getRecipeFilters(recipeBuffer).cuisineSet as item}
+					<option value={item}>{item}</option>
+				{/each}
+			</select>
+		</label>
 	</div>
 	<div class="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 		{#each paginatedRecipes as recipe}
