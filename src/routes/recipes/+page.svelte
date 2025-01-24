@@ -7,7 +7,6 @@
 
 	import RecipeModal from '$lib/components/RecipeModal.svelte';
 	import RecipePage from './[id]/+page.svelte';
-	import type { ChangeEventHandler } from 'svelte/elements';
 
 	let { data } = $props();
 
@@ -38,13 +37,17 @@
 
 	let searchText = $state<string | null>(null);
 
+	let selectedTag = $state<string | null>(null);
 	let filteredRecipes = $derived.by(() => {
 		let keyword = searchText?.toLowerCase();
-		if (keyword) {
-			return recipeBuffer.filter((r) => r.keywords.includes(keyword));
-		} else {
-			return recipeBuffer;
-		}
+		let tag = selectedTag?.toLowerCase();
+
+		return recipeBuffer.filter((r) => {
+			const matchesSearch = keyword ? r.keywords.includes(keyword) : true;
+			const matchesTag = tag ? r.tags.some((t) => t.toLowerCase() === tag) : true;
+
+			return matchesSearch && matchesTag;
+		});
 	});
 
 	let totalPages = $derived(Number(Math.ceil(filteredRecipes.length / perPage)));
@@ -52,7 +55,6 @@
 	let paginatedRecipes = $derived(
 		filteredRecipes.slice(currentPage * perPage, (currentPage + 1) * perPage)
 	);
-	let selectedTag = $state<string | null>(null);
 
 	function getRecipeTags(input: Array<Recipe & { keywords: string }>) {
 		let tagSet = new Set();
@@ -66,7 +68,7 @@
 
 	function filterByTag(event: Event): void {
 		const selectElement = event.target as HTMLSelectElement;
-		const selectedTag = selectElement.value;
+		selectedTag = selectElement.value;
 	}
 </script>
 
