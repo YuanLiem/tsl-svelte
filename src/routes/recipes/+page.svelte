@@ -11,7 +11,6 @@
 	let { data } = $props();
 
 	let perPage = $state(12);
-	let totalPages = $derived(Number(Math.ceil(data.recipeData.total / perPage)));
 
 	let currentPage = $state(0);
 
@@ -46,6 +45,8 @@
 			return recipeBuffer;
 		}
 	});
+
+	let totalPages = $derived(Number(Math.ceil(filteredRecipes.length / perPage)));
 
 	let paginatedRecipes = $derived(
 		filteredRecipes.slice(currentPage * perPage, (currentPage + 1) * perPage)
