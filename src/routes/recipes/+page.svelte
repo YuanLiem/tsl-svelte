@@ -29,19 +29,19 @@
 		}
 	}
 
-	const recipeBuffer: Array<Recipe & { searchTerms: string }> = data.allRecipes.recipes.map(
+	const recipeBuffer: Array<Recipe & { keywords: string }> = data.allRecipes.recipes.map(
 		(recipe: Recipe) => ({
 			...recipe,
-			searchTerms: `${recipe.name} ${recipe.tags.join(' ')} ${recipe.difficulty}`.toLowerCase()
+			keywords: `${recipe.name} ${recipe.tags.join(' ')} ${recipe.difficulty}`.toLowerCase()
 		})
 	);
 
 	let searchText = $state<string | null>(null);
 
 	let filteredRecipes = $derived.by(() => {
-		let target = searchText?.toLowerCase();
-		if (target || selectedTag) {
-			return recipeBuffer.filter((r) => r.searchTerms.includes(target));
+		let keyword = searchText?.toLowerCase();
+		if (keyword) {
+			return recipeBuffer.filter((r) => r.keywords.includes(keyword));
 		} else {
 			return recipeBuffer;
 		}
@@ -54,7 +54,7 @@
 	);
 	let selectedTag = $state<string | null>(null);
 
-	function getRecipeTags(input: Array<Recipe & { searchTerms: string }>) {
+	function getRecipeTags(input: Array<Recipe & { keywords: string }>) {
 		let tagSet = new Set();
 		input.forEach((recipe) => {
 			recipe.tags.forEach((tag) => {
