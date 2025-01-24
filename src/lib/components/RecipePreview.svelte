@@ -19,8 +19,8 @@
 	];
 </script>
 
-<div class="mx-auto max-w-[80%] rounded-b-xl shadow-md">
-	<figure class="relative overflow-hidden rounded-t-xl">
+<div class="mx-auto h-full max-w-[80%] overflow-hidden rounded-xl shadow-md">
+	<figure class="relative overflow-hidden">
 		<img
 			class="z-10 aspect-auto object-cover transition-transform duration-300 hover:scale-105"
 			src={props.image}
