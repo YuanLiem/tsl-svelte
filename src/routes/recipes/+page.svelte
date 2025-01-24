@@ -12,7 +12,8 @@
 
 	let perPage = $state(12);
 	let totalPages = $derived(Number(Math.ceil(data.recipeData.total / perPage)));
-	let currentPage = $derived(Math.floor(Number(page.url.searchParams.get('skip') || 0) / perPage));
+
+	let currentPage = $state(0);
 
 	async function openModal(e: MouseEvent) {
 		if (innerWidth < 640 || e.shiftKey || e.metaKey || e.ctrlKey || e.altKey) return;
@@ -45,6 +46,10 @@
 			return recipeBuffer;
 		}
 	});
+
+	let paginatedRecipes = $derived(
+		filteredRecipes.slice(currentPage * perPage, (currentPage + 1) * perPage)
+	);
 </script>
 
 <div class="container">
@@ -57,27 +62,31 @@
 		/>
 	</div>
 	<div class="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
-		{#each filteredRecipes as recipe}
+		{#each paginatedRecipes as recipe}
 			<a href={`/recipes/${recipe.id}`} onclick={openModal}>
 				<RecipePreview props={recipe} />
 			</a>
 		{/each}
 	</div>
 	<div class="mx-auto flex max-w-lg flex-row justify-center gap-10 py-8">
-		{#if currentPage > 0 && currentPage < totalPages}
-			<a href={`/recipes?limit=${perPage}&skip=${perPage * (currentPage - 1)}`}><ChevronLeft /></a>
-		{/if}
+		<button
+			onclick={() => currentPage--}
+			disabled={currentPage === 0}
+			class="disabled:cursor-not-allowed disabled:opacity-20"><ChevronLeft /></button
+		>
 		{#each { length: totalPages } as _, page}
-			<a
-				href={`/recipes?limit=${perPage}&skip=${perPage * page}`}
+			<button
+				onclick={() => (currentPage = page)}
 				class={currentPage === page ? 'text-emerald-300 hover:opacity-80' : 'hover:opacity-80'}
 			>
 				{page + 1}
-			</a>
+			</button>
 		{/each}
-		{#if currentPage + 1 < totalPages}
-			<a href={`/recipes?limit=${perPage}&skip=${perPage * (currentPage + 1)}`}><ChevronRight /></a>
-		{/if}
+		<button
+			onclick={() => currentPage++}
+			disabled={currentPage + 1 >= totalPages}
+			class="disabled:cursor-not-allowed disabled:opacity-20"><ChevronRight /></button
+		>
 	</div>
 </div>
 {#if page.state.selected}
