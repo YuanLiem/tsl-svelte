@@ -12,18 +12,24 @@ type Ingredient = {
 export class GroceryList {
 	listKey = '';
 	list = $state<Ingredient[]>([]);
+	recipeKey = '';
 	recipes = $state<number[]>([]);
 
-	constructor(listKey: string, list: Ingredient[]) {
+	constructor(listKey: string, list: Ingredient[], recipeKey: string, recipes: number[]) {
 		this.listKey = listKey;
 		this.list = list;
+		this.recipeKey = recipeKey;
+		this.recipes = recipes;
 
 		if (browser) {
-			const item = localStorage.getItem(listKey);
-			if (item) this.list = this.deserialize(item);
+			const list = localStorage.getItem(listKey);
+			const recipes = localStorage.getItem(recipeKey);
+			if (list) this.list = this.deserialize(list);
+			if (recipes) this.recipes = this.deserialize(recipes);
 		}
 		$effect(() => {
 			localStorage.setItem(this.listKey, this.serialize(this.list));
+			localStorage.setItem(this.recipeKey, this.serialize(this.recipes));
 		});
 	}
 
@@ -70,7 +76,7 @@ export class GroceryList {
 const LIST_KEY = Symbol('GROCERY_LIST');
 
 export function setGroceryList() {
-	return setContext(LIST_KEY, new GroceryList('_groceries', []));
+	return setContext(LIST_KEY, new GroceryList('_groceries', [], '_recipes', []));
 }
 
 export function getGroceryList() {

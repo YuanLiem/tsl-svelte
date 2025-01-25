@@ -12,6 +12,10 @@ export const siteConfig: SiteConfig = {
 		{
 			label: 'Recipes',
 			slug: '/recipes'
+		},
+		{
+			label: 'Grocery List',
+			slug: '/grocery-list'
 		}
 	],
 	footerLegal: [
