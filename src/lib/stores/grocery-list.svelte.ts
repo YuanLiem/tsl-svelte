@@ -44,12 +44,18 @@ export class GroceryList {
 		}
 		this.recipes.push(input.id);
 	}
-	checkItem(input: string) {
-		// TODO:checking items
-	}
+
 	deleteItem(input: Ingredient) {
+		if (this.list.length === 1) {
+			this.deleteRecipe(input.recipeId);
+		}
 		this.list = this.list.filter((item) => item.id !== input.id);
 	}
+
+	deleteRecipe(input: number) {
+		this.recipes = this.recipes.filter((recipe) => recipe !== input);
+	}
+
 	clearList() {
 		this.list = [];
 		this.recipes = [];
