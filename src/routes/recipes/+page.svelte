@@ -4,6 +4,7 @@
 	import { ChevronLeft, ChevronRight } from 'lucide-svelte';
 	import { preloadData, pushState, goto } from '$app/navigation';
 	import { page } from '$app/state';
+	// TODO: Break into separate RecipeFilter & Pagination components
 
 	import RecipeModal from '$lib/components/RecipeModal.svelte';
 	import RecipePage from './[id]/+page.svelte';
