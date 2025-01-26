@@ -1,13 +1,13 @@
 <script lang="ts">
 	import type { Recipe } from '$lib/types/types';
 	import RecipePreview from '$lib/components/RecipePreview.svelte';
-	import { ChevronLeft, ChevronRight } from 'lucide-svelte';
 	import { preloadData, pushState, goto } from '$app/navigation';
 	import { page } from '$app/state';
-	// TODO: Break into separate RecipeFilter & Pagination components
+	// TODO: Break into separate RecipeFilter component
 
 	import RecipeModal from '$lib/components/RecipeModal.svelte';
 	import RecipePage from './[id]/+page.svelte';
+	import Pagination from '$lib/components/Pagination.svelte';
 
 	let { data } = $props();
 
@@ -126,26 +126,13 @@
 			</p>
 		{/if}
 	</div>
-	<div class="mx-auto flex max-w-lg flex-row justify-center gap-10 py-8">
-		<button
-			onclick={() => currentPage--}
-			disabled={currentPage === 0}
-			class="disabled:cursor-not-allowed disabled:opacity-20"><ChevronLeft /></button
-		>
-		{#each { length: totalPages } as _, page}
-			<button
-				onclick={() => (currentPage = page)}
-				class={currentPage === page ? 'text-emerald-300 hover:opacity-80' : 'hover:opacity-80'}
-			>
-				{page + 1}
-			</button>
-		{/each}
-		<button
-			onclick={() => currentPage++}
-			disabled={currentPage + 1 >= totalPages}
-			class="disabled:cursor-not-allowed disabled:opacity-20"><ChevronRight /></button
-		>
-	</div>
+	<Pagination
+		increment={() => currentPage++}
+		decrement={() => currentPage--}
+		update={(num: number) => (currentPage = num)}
+		{currentPage}
+		{totalPages}
+	/>
 </div>
 {#if page.state.selected}
 	<RecipeModal onclose={() => history.back()}>
