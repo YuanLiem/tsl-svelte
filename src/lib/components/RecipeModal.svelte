@@ -2,7 +2,7 @@
 	import type { Snippet } from 'svelte';
 	import { fade } from 'svelte/transition';
 
-	let { children, onclose }: { children: Snippet; onclose: () => void } = $props();
+	let { children }: { children: Snippet } = $props();
 
 	function handleKeyDown(e: KeyboardEvent) {
 		if (e.key !== 'Enter' && e.key !== ' ') return;
