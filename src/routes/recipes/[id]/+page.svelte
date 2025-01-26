@@ -13,7 +13,7 @@
 
 <div class="container">
 	<div class="mx-auto max-w-lg py-8 md:max-w-none">
-		<Button class="mb-4 rounded-full md:hidden" onclick={() => goBack()}
+		<Button class="mb-4 rounded-full md:hidden" onclick={goBack}
 			><ArrowLeft class="h-4 w-4" /> Go Back</Button
 		>
 		<RecipeCard recipe={data.recipe} />

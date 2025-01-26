@@ -45,7 +45,6 @@
 	};
 
 	const tags = recipe.tags;
-	console.log(groceries.recipes);
 </script>
 
 <div
@@ -85,18 +84,18 @@
 			</div>
 		</div>
 		<div class="flex w-full flex-row flex-wrap items-center justify-between gap-4">
-			<Button
-				disabled={groceries.recipes.includes(recipe.id) ? true : false}
-				onclick={() => groceries.addItems(recipe)}
-			>
-				{groceries.recipes.includes(recipe.id) ? 'Added  to list' : 'Add to list'}
-			</Button>
 			<div class="inline-flex flex-wrap gap-4">
 				<RecipeBadge features={calories} />
 				{#each tags.slice(0, 3) as tag}
 					<RecipeBadge features={{ value: tag }} />
 				{/each}
 			</div>
+			<Button
+				disabled={groceries.recipes.includes(recipe.id) ? true : false}
+				onclick={() => groceries.addItems(recipe)}
+			>
+				{groceries.recipes.includes(recipe.id) ? 'Added  to list' : 'Add to list'}
+			</Button>
 		</div>
 	</div>
 </div>
