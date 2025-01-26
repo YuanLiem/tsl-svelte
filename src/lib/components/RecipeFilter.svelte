@@ -5,8 +5,10 @@
 		search = $bindable(),
 		tags = $bindable(),
 		cuisine = $bindable(),
+		perpage = $bindable(),
 		filteredRecipes
 	} = $props();
+
 	function getRecipeFilters(input: Array<Recipe & { keywords: string }>) {
 		let tagSet = new Set();
 		let cuisineSet = new Set();
@@ -42,7 +44,7 @@
 		</select>
 	</label>
 	<label for="cuisine" class="content-center">
-		<span class="mr-2"> Select a cuisine </span>
+		<span class="mr-2"> Select a cuisine</span>
 		<select
 			class="rounded-lg border-2 p-2 focus:border-primary"
 			name="cuisine"
@@ -52,6 +54,20 @@
 			{#each getRecipeFilters(filteredRecipes).cuisineSet as item}
 				<option value={item}>{item}</option>
 			{/each}
+		</select>
+	</label>
+	<label for="pagecount" class="content-center">
+		<span class="mr-2">Per page</span>
+		<select
+			class="rounded-lg border-2 p-2 focus:border-primary"
+			name="pagecount"
+			id="pagecount"
+			bind:value={perpage}
+		>
+			<option value={4}>4</option>
+			<option value={8}>8</option>
+			<option value={12} selected>12</option>
+			<option value={16}>16</option>
 		</select>
 	</label>
 </div>
