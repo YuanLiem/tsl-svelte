@@ -8,9 +8,6 @@ describe('db.getRandomRecipe', () => {
 			randomDigits.push(randomDigit);
 		}
 
-		//const failedValues = randomDigits.filter((i) => i < 1 || i > 50);
-		//
-		//console.log(`failed values is ${failedValues}`);
 		expect(randomDigits.every((i) => i >= 1 && i <= 50)).toBe(true);
 	});
 });
