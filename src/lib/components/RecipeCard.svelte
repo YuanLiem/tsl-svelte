@@ -91,9 +91,9 @@
 			>
 				{groceries.recipes.includes(recipe.id) ? 'Added  to list' : 'Add to list'}
 			</Button>
-			<RecipeBadge features={calories} />
 			<div class="inline-flex flex-wrap gap-4">
-				{#each tags as tag}
+				<RecipeBadge features={calories} />
+				{#each tags.slice(0, 3) as tag}
 					<RecipeBadge features={{ value: tag }} />
 				{/each}
 			</div>
