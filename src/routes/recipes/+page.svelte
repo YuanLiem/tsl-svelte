@@ -119,7 +119,9 @@
 				</a>
 			{/each}
 		{:else}
-			<p class="md:col-span3 text-center text-2xl text-muted-foreground lg:col-span-4">
+			<p
+				class="text-center text-2xl text-muted-foreground sm:col-span-2 md:col-span-3 lg:col-span-4"
+			>
 				No matching recipes found..
 			</p>
 		{/if}

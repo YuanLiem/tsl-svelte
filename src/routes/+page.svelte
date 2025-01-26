@@ -28,9 +28,12 @@
 
 <div class="container py-8">
 	<div class="container">
-		<div class="mb-8 w-full text-center">
+		<div class="text-center">
 			<h1 class="mb-4 text-2xl font-bold">Let Math.random decide what's on the menu</h1>
-			<Button disabled={isLoading} size="lg" onclick={fetchNewRecipe}>Randomize</Button>
+			<div class="mb-8 w-full">
+				<Button disabled={isLoading} size="lg" onclick={fetchNewRecipe}>Randomize</Button>
+				<Button size="lg" variant="outline" href="/recipes">Browse all</Button>
+			</div>
 		</div>
 		{#await currentRecipe}
 			<RecipeSkeleton />
