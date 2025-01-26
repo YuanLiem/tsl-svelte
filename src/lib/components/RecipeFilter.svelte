@@ -1,5 +1,13 @@
 <script lang="ts">
 	import type { Recipe } from '$lib/types/types';
+	import { getRecipeFilters } from '$lib/utils';
+	type Props = {
+		search: string | null;
+		tags: string | null;
+		cuisine: string | null;
+		perpage: number;
+		filteredRecipes: Array<Recipe & { keywords: string }>;
+	};
 
 	let {
 		search = $bindable(),
@@ -7,19 +15,7 @@
 		cuisine = $bindable(),
 		perpage = $bindable(),
 		filteredRecipes
-	} = $props();
-
-	function getRecipeFilters(input: Array<Recipe & { keywords: string }>) {
-		let tagSet = new Set();
-		let cuisineSet = new Set();
-		input.forEach((recipe) => {
-			cuisineSet.add(recipe.cuisine);
-			recipe.tags.forEach((tag) => {
-				tagSet.add(tag);
-			});
-		});
-		return { tagSet, cuisineSet };
-	}
+	}: Props = $props();
 </script>
 
 <div class="flex flex-col flex-wrap content-center justify-center gap-10 py-8 md:flex-row">

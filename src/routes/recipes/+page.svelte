@@ -96,7 +96,7 @@
 	/>
 </div>
 {#if page.state.selected}
-	<RecipeModal onclose={() => history.back()}>
+	<RecipeModal>
 		<RecipePage data={page.state.selected} />
 	</RecipeModal>
 {/if}
