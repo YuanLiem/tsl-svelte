@@ -64,6 +64,7 @@
 </script>
 
 <div class="container">
+	<h1 class="mt-10 text-center text-2xl font-bold">Browse all recipes</h1>
 	<RecipeFilter
 		bind:search={searchText}
 		bind:tags={selectedTag}
