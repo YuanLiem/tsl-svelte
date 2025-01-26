@@ -48,7 +48,9 @@
 	class="sticky top-0 z-30 flex items-center justify-between bg-primary-foreground p-4 shadow-md"
 >
 	<div class="font-bold">
-		{siteConfig.companyName}
+		<a href="/">
+			{siteConfig.companyName}
+		</a>
 	</div>
 	<nav class="flex flex-row items-center gap-4">
 		<ul class="hidden max-w-sm md:contents">
