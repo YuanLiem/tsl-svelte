@@ -5,7 +5,7 @@
 	let { props }: { props: Recipe } = $props();
 	import { ChartColumnIncreasing, Earth } from 'lucide-svelte';
 
-	const features = [
+	const features = $derived([
 		{
 			label: 'Difficulty',
 			value: `${props.difficulty}`,
@@ -16,7 +16,7 @@
 			value: `${props.cuisine}`,
 			icon: Earth
 		}
-	];
+	]);
 </script>
 
 <div class="mx-auto h-full max-w-[80%] overflow-hidden rounded-xl shadow-md">
