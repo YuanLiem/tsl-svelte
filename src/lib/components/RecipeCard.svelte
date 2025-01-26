@@ -15,15 +15,15 @@
 	let { recipe }: { recipe: Recipe } = $props();
 	let groceries = getGroceryList();
 
-	const info: RecipeFeature[] = [
+	const info: RecipeFeature[] = $derived([
 		{
 			label: 'Prep Time',
-			value: `${recipe.prepTimeMinutes} mins`,
+			value: `Prep: ${recipe.prepTimeMinutes} mins`,
 			icon: Clock8
 		},
 		{
 			label: 'Cook Time',
-			value: `${recipe.cookTimeMinutes} mins`,
+			value: `Cook: ${recipe.cookTimeMinutes} mins`,
 			icon: Clock4
 		},
 		{
@@ -33,18 +33,18 @@
 		},
 		{
 			label: 'Servings',
-			value: `${recipe.servings}`,
+			value: `${recipe.servings} servings`,
 			icon: HandPlatter
 		}
-	];
+	]);
 
-	const calories = {
+	const calories = $derived({
 		label: 'Calories/Serving',
 		value: `${recipe.caloriesPerServing} kcal`,
 		icon: GaugeCircleIcon
-	};
+	});
 
-	const tags = recipe.tags;
+	const tags = $derived(recipe.tags);
 </script>
 
 <div
