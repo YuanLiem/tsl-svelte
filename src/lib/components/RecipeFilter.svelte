@@ -64,7 +64,6 @@
 			id="pagecount"
 			bind:value={perpage}
 		>
-			<option value={4}>4</option>
 			<option value={8}>8</option>
 			<option value={12} selected>12</option>
 			<option value={16}>16</option>

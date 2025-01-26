@@ -3,7 +3,7 @@
 	let { increment, decrement, update, currentPage, totalPages } = $props();
 </script>
 
-<div class="mx-auto flex max-w-lg flex-row justify-center gap-10 py-8">
+<div class="mx-auto flex max-w-lg flex-row justify-center gap-6 py-8">
 	<button
 		onclick={decrement}
 		disabled={currentPage === 0}

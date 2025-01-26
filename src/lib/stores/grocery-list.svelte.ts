@@ -24,6 +24,7 @@ export class GroceryList {
 		if (browser) {
 			const list = localStorage.getItem(listKey);
 			const recipes = localStorage.getItem(recipeKey);
+
 			if (list) this.list = this.deserialize(list);
 			if (recipes) this.recipes = this.deserialize(recipes);
 		}
