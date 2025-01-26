@@ -67,7 +67,7 @@
 	<ThemeButton class="hidden md:flex" />
 </header>
 {#if isOpen}
-	<nav class="fixed top-16 z-10 flex h-full w-full flex-col bg-primary-foreground/60">
+	<nav class="fixed top-16 z-20 flex h-full w-full flex-col bg-primary-foreground/60">
 		<ul class="flex flex-col gap-2 bg-primary-foreground px-4 py-8">
 			{#each siteConfig.menuItems as item}
 				{@render mobileItem(item)}

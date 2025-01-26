@@ -30,8 +30,12 @@
 	<div class="container">
 		<div class="text-center">
 			<h1 class="mb-4 text-2xl font-bold">Let Math.random decide what's on the menu</h1>
-			<div class="mb-8 w-full">
-				<Button disabled={isLoading} size="lg" onclick={fetchNewRecipe}>Randomize</Button>
+			<div class="mb-8 flex justify-center gap-10">
+				<div class="glow-wrapper">
+					<Button class="glow-child" disabled={isLoading} size="lg" onclick={fetchNewRecipe}
+						>Randomize</Button
+					>
+				</div>
 				<Button size="lg" variant="outline" href="/recipes">Browse all</Button>
 			</div>
 		</div>
