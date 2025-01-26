@@ -1,8 +1,6 @@
 <script lang="ts">
 	import type { RecipeFeature } from '$lib/types/types';
 	let { features }: { features: RecipeFeature } = $props();
-	// TODO: Hover should show label (on Desktop)
-	// TODO: Label should show on mobile
 </script>
 
 <div class="inline-flex w-fit rounded-full border bg-muted px-2 py-0.5 text-sm">

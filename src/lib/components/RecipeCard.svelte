@@ -9,8 +9,8 @@
 	} from 'lucide-svelte';
 	import RecipeRating from './RecipeRating.svelte';
 	import RecipeBadge from './RecipeBadge.svelte';
-	import { getGroceryList } from '$lib/stores/grocery-list.svelte';
 	import Button from './ui/button/button.svelte';
+	import { getGroceryList } from '$lib/stores/grocery-list.svelte';
 
 	let { recipe }: { recipe: Recipe } = $props();
 	let groceries = getGroceryList();
