@@ -3,11 +3,11 @@
 	import RecipePreview from '$lib/components/RecipePreview.svelte';
 	import { preloadData, pushState, goto } from '$app/navigation';
 	import { page } from '$app/state';
-	// TODO: Break into separate RecipeFilter component
 
 	import RecipeModal from '$lib/components/RecipeModal.svelte';
 	import RecipePage from './[id]/+page.svelte';
 	import Pagination from '$lib/components/Pagination.svelte';
+	import RecipeFilter from '$lib/components/RecipeFilter.svelte';
 
 	let { data } = $props();
 
@@ -61,56 +61,15 @@
 	let paginatedRecipes = $derived(
 		filteredRecipes.slice(currentPage * perPage, (currentPage + 1) * perPage)
 	);
-
-	function getRecipeFilters(input: Array<Recipe & { keywords: string }>) {
-		let tagSet = new Set();
-		let cuisineSet = new Set();
-		input.forEach((recipe) => {
-			cuisineSet.add(recipe.cuisine);
-			recipe.tags.forEach((tag) => {
-				tagSet.add(tag);
-			});
-		});
-		return { tagSet, cuisineSet };
-	}
 </script>
 
 <div class="container">
-	<div class="flex flex-col flex-wrap content-center justify-center gap-10 py-8 md:flex-row">
-		<input
-			placeholder="Filter recipes.."
-			class="rounded-lg border-2 p-2 focus:border-primary"
-			type="text"
-			bind:value={searchText}
-		/>
-		<label for="tag" class="content-center">
-			<span class="mr-2">Select a tag </span>
-			<select
-				class="rounded-lg border-2 p-2 focus:border-primary"
-				bind:value={selectedTag}
-				name="tag"
-				id="tag"
-			>
-				<option value={null} selected>All tags</option>
-				{#each getRecipeFilters(filteredRecipes).tagSet as item}
-					<option value={item}>{item}</option>
-				{/each}
-			</select>
-		</label>
-		<label for="cuisine" class="content-center">
-			<span class="mr-2"> Select a cuisine </span>
-			<select
-				class="rounded-lg border-2 p-2 focus:border-primary"
-				name="cuisine"
-				bind:value={selectedCuisine}
-			>
-				<option value={null} selected>All cuisines</option>
-				{#each getRecipeFilters(filteredRecipes).cuisineSet as item}
-					<option value={item}>{item}</option>
-				{/each}
-			</select>
-		</label>
-	</div>
+	<RecipeFilter
+		bind:search={searchText}
+		bind:tags={selectedTag}
+		bind:cuisine={selectedCuisine}
+		{filteredRecipes}
+	/>
 	<div class="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 		{#if paginatedRecipes.length > 0}
 			{#each paginatedRecipes as recipe}
