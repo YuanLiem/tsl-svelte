@@ -51,7 +51,7 @@
 	class="flex flex-col overflow-hidden rounded-xl border bg-primary-foreground shadow-md md:flex-row"
 >
 	<figure class="overflow-hidden md:w-1/2">
-		<img src={recipe.image} class="h-full object-cover" alt={recipe.name} />
+		<img src={recipe.image} class="object-cover" alt={recipe.name} />
 	</figure>
 	<div class="flex flex-col items-start gap-4 p-8 md:w-1/2">
 		<div class="flex w-full flex-row items-center justify-between">
@@ -93,6 +93,7 @@
 			<Button
 				disabled={groceries.recipes.includes(recipe.id) ? true : false}
 				onclick={() => groceries.addItems(recipe)}
+				data-testid="add-to-list"
 			>
 				{groceries.recipes.includes(recipe.id) ? 'Added  to list' : 'Add to list'}
 			</Button>
