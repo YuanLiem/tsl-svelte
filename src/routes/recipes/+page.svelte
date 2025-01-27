@@ -72,7 +72,10 @@
 		bind:perpage={perPage}
 		{filteredRecipes}
 	/>
-	<div class="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+	<div
+		data-testid="recipe-grid"
+		class="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+	>
 		{#if paginatedRecipes.length > 0}
 			{#each paginatedRecipes as recipe}
 				<a href={`/recipes/${recipe.id}`} onclick={openModal}>

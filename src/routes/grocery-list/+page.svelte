@@ -11,9 +11,9 @@
 	<div class="mx-auto max-w-xl rounded-xl border bg-primary-foreground p-8 shadow-md">
 		<h1 class="mb-4 text-2xl font-bold">Grocery List</h1>
 		{#if groceries.list.length > 0}
-			<ul class="mb-8 flex flex-col gap-4">
+			<ul data-testid="grocery-list" class="mb-8 flex flex-col gap-4">
 				{#each groceries.list as item (item.id)}
-					<li class="flex items-center justify-between">
+					<li data-testid="grocery-item" class="flex items-center justify-between">
 						<input bind:checked={item.checked} type="checkbox" />
 						<p class={cn(item.checked ? 'text-muted-foreground line-through' : '', 'ml-4 w-full')}>
 							{item.name}

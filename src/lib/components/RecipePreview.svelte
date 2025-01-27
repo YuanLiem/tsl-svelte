@@ -19,7 +19,10 @@
 	]);
 </script>
 
-<div class="mx-auto h-full max-w-[80%] overflow-hidden rounded-xl shadow-md">
+<div
+	data-testid="recipe-preview"
+	class="mx-auto h-full max-w-[80%] overflow-hidden rounded-xl shadow-md"
+>
 	<figure class="relative overflow-hidden">
 		<img
 			class="z-10 aspect-auto object-cover transition-transform duration-300 hover:scale-105"
