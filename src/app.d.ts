@@ -8,7 +8,13 @@ declare global {
 		interface PageState {
 			selected?: Recipe;
 		}
-		// interface Platform {}
+
+		interface Platform {
+			env: Env;
+			ctx: ExecutionContext;
+			caches: CacheStorage;
+			cf?: IncomingRequestCfProperties;
+		}
 	}
 }
 
